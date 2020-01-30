@@ -69,20 +69,18 @@ export class AuthContextProvider extends Component {
 		return console.log('logout');
 	}
 
-	komen = () => {
-		const userObject = {
-            komen_isi: this.state.komen_isi,
-            komen_email : this.state.komen_email
-        };
+	komen = (credentials) => {
+		return axiosReq.post("http://localhost:8000/api/komen", credentials)
+		.then(response => {
+			const userObject = {
+	            komen_isi: this.state.komen_isi,
+	            komen_email : this.state.komen_email
+	        };
 
-        return axios.post('http://localhost:8000/api/komen', userObject)
-            .then((res) => {
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error)
-            });
-
-        this.setState({ komen_isi: '', komen_email: ''})
+			this.setState({
+				userObject
+			})
+		})
 	}
 
 	render() {
@@ -91,6 +89,7 @@ export class AuthContextProvider extends Component {
 				login:this.login,
 				logout:this.logout,
 				initUser:this.initUser,
+				komen:this.komen,
 				...this.state
 			}}>
 			{this.props.children}
