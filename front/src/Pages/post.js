@@ -4,7 +4,7 @@ import {withAuth} from '../Context/AuthContext';
 class Post extends Component {
 	state = {
 		komen_isi: '',
-		komen_email: this.props.user.email
+		komen_email: ''
 	}
 
 	handleChange = (e) => {
@@ -27,7 +27,9 @@ class Post extends Component {
 					<div className="row">
 						<div className="span4 well">
 							<form onSubmit={this.handleSubmit}>
-								<textarea onChange={this.handleChange} value={this.state.komen_isi} className="span4" id="new_message" name="komen_isi" placeholder="Type in your message" rows="5"></textarea>
+								<div className="form-group">
+									<textarea onChange={this.handleChange} value={this.state.komen_isi} className="span4" id="new_message" name="komen_isi" placeholder="Type in your message" rows="5"></textarea>
+								</div>
 								<button className="btn btn-info" type="submit">Post New Message</button>
 							</form>
 						</div>
